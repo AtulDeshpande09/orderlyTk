@@ -54,9 +54,9 @@ class OrderList:
         CurrentOrder.quantity = OrderObject.quantity
 
         #take inputs for data in order object
-        """CurrentOrder.name = input('Enter Name : ')
+        CurrentOrder.name = input('Enter Name : ')
         CurrentOrder.order = input('Enter Order : ')
-        CurrentOrder.quantity = input('Enter Quantity : ')"""
+        CurrentOrder.quantity = input('Enter Quantity : ')
 
         #set orderID
         self.orderID = self.orderID + 1
@@ -108,8 +108,7 @@ class OrderList:
 
 
     def display_list(self):
-        # i will do it later once i am done with GUI.
-        pass
+        print(self.OrderList)
 
     def __repr__(self):
         return f'Order List of : {self.today}'
