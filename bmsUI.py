@@ -71,17 +71,18 @@ class UI:
         Label(self.right_frame, text='Order').grid(row=0, column=3, sticky=W,padx =20,pady=10)
         Label(self.right_frame, text='Quantity').grid(row=0, column=4, sticky=W,padx =20,pady=10)
 
+        self.show_list = [ [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0]]
 
-        self.show_list = []
 
-        for i in range( 1,6):
+        for i in range(5):
 
-            Label(self.right_frame, text='{}').grid(row=i , column=0, sticky=W,padx =20,pady=10)
-            Label(self.right_frame, text='Time').grid(row=i , column=1, sticky=W,padx =20,pady=10)
+            Label(self.right_frame, text= f'{self.show_list[0][i]}').grid(row=i+1 , column=0, sticky=W,padx =20,pady=10)
+            Label(self.right_frame, text= f'{self.show_list[0][i]}').grid(row=i+1 , column=1, sticky=W,padx =20,pady=10)
 
-            Label(self.right_frame, text='Name').grid(row=i, column=2, sticky=W,padx =20,pady=10)
-            Label(self.right_frame, text='Order').grid(row=i, column=3, sticky=W,padx =20,pady=10)
-            Label(self.right_frame, text='Quantity').grid(row=i , column=4, sticky=W,padx =20,pady=10)
+            Label(self.right_frame, text= f'{self.show_list[0][i]}').grid(row=i+1, column=2, sticky=W,padx =20,pady=10)
+            Label(self.right_frame, text= f'{self.show_list[0][i]}').grid(row=i+1, column=3, sticky=W,padx =20,pady=10)
+            Label(self.right_frame, text= f'{self.show_list[0][i]}').grid(row=i+1 , column=4, sticky=W,padx =20,pady=10)
+
 
 
 
@@ -89,10 +90,21 @@ class UI:
 
 
 
+    def right_display(self):
 
-
-
-
+        if len(self.orderID_list) >= 5:
+            self.show_list[0] = self.time_list[-1:-5]
+            self.show_list[1] = self.orderID_list[-1:-5]
+            self.show_list[2] = self.name_list[-1:-5]
+            self.show_list[3] = self.order_list[-1:-5]
+            self.show_list[4] = self.quantity_list[-1:-5]
+        else:
+            for i in range(len(self.orderID_list)):
+                self.show_list[i] = self.time_list[-1-i]
+                self.show_list[i] = self.orderID_list[-1-i]
+                self.show_list[i] = self.name_list[-1-i]
+                self.show_list[i] = self.order_list[-1-i]
+                self.show_list[i] = self.quantity_list[-1-i]
 
 
     ## add method link
@@ -142,9 +154,9 @@ class UI:
         print('Order:', order)
         print('Quantity:', quantity)
         self.orderID += 1
+
+        self.right_display()
     ##
-
-
 
 
 
@@ -213,6 +225,9 @@ class UI:
         self.name_list[self.index_number] = name        
         self.order_list[self.index_number] = order
         self.quantity_list[self.index_number] = quantity
+
+
+        self.right_display()
 
 
     def edit_with_index(self):
@@ -298,6 +313,8 @@ class UI:
         del self.orderID_list[self.delete_index_number]
 
         print('Order Deleted successfully')
+
+        self.right_display()
     
     ##
 
